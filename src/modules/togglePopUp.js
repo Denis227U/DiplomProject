@@ -36,7 +36,8 @@ const togglePopUp = () => {
     // popup-discount
     const popupDiscount = () => {
         const discountBlock = document.querySelector('.sentence .row'),
-            popUp = document.querySelector('.popup-discount');
+            popUp = document.querySelector('.popup-discount'),
+            disctBtn = document.getElementById('discountBtn');
 
         discountBlock.addEventListener('click', (event) => {
             let target = event.target;
@@ -44,6 +45,10 @@ const togglePopUp = () => {
             if (target) {
                 popUp.style.display = 'block';
             }
+        });
+
+        disctBtn.addEventListener('click', () => {            
+            popUp.style.display = 'block';            
         });
 
         popUp.addEventListener('click', (event) => {

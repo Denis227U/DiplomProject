@@ -3,6 +3,7 @@
 import btnMore from './modules/btnMore';
 import accordionQuest from './modules/accordionQuest';
 import togglePopUp from './modules/togglePopUp';
+import accordionCalc from './modules/accordionCalc';
 
 
 
@@ -14,3 +15,6 @@ accordionQuest();
 
 // all popUps
 togglePopUp();
+
+// аккардеон-калькулятор
+accordionCalc();
