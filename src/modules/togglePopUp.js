@@ -33,38 +33,22 @@ const togglePopUp = () => {
     };
     popupCall();
 
-    // popup-discount
-    const popupDiscount = () => {
-        const discountBlock = document.querySelector('.sentence .row'),
-            popUp = document.querySelector('.popup-discount'),
-            disctBtn = document.getElementById('discountBtn');
-
-        discountBlock.addEventListener('click', (event) => {
-            let target = event.target;
-            target = target.closest('.discount-btn');
-            if (target) {
-                popUp.style.display = 'block';
-            }
-        });
-
-        disctBtn.addEventListener('click', () => {            
-            popUp.style.display = 'block';            
-        });
-
-        popUp.addEventListener('click', (event) => {
-            let target = event.target;
-            closePopUp(target, popUp);
-        });
-    };
-    popupDiscount();
-
     // popup-check 
     const popupCheck = () => {
         const checkBtn = document.querySelector('.check-btn'),
+            sentenceBlock = document.querySelector('.sentence .row'),
             popUp = document.querySelector('.popup-check');
 
         checkBtn.addEventListener('click', (event) => {
             popUp.style.display = 'block';
+        });
+
+        sentenceBlock.addEventListener('click', (event) => {
+            let target = event.target;
+            target = target.closest('.sentence-btn');
+            if (target) {
+                popUp.style.display = 'block';
+            }
         });
 
         popUp.addEventListener('click', (event) => {
@@ -76,12 +60,7 @@ const togglePopUp = () => {
 
     // popup-consultation
     const popupConsultation = () => {
-        const consultationBtn = document.querySelector('.consultation-btn'),
-            popUp = document.querySelector('.popup-consultation');
-
-        consultationBtn.addEventListener('click', (event) => {
-            popUp.style.display = 'block';
-        });
+        const popUp = document.querySelector('.popup-consultation');
 
         popUp.addEventListener('click', (event) => {
             let target = event.target;

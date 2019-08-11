@@ -4,7 +4,16 @@ const accordionCalc = () => {
         panelContent = panelGroup.querySelectorAll('.panel-collapse'),
         nextBtn = document.querySelectorAll('.constructor .panel-collapse .button'); 
 
-    
+    let calcStore = {
+        storageBox: 'Однокамерный',
+        firstSump: ['1.4 метра', '1 штука'],
+        secondSump: [],
+        bilge: 'Есть',
+        distance: 0,
+        cost: 0
+    };
+
+
     // переключение табов
     const togglePanelContent = (index) => {
         for (let i = 0; i < panelContent.length; i++) {
@@ -39,15 +48,9 @@ const accordionCalc = () => {
             });
         }
     });
-    
 
 
-    // калькулятор    
-    let calcObj = {
-        distance: 0,
-        cost: 0
-    };
-
+    // калькулятор
     const calc = () => {
         const calcBlock = document.getElementById('accordion'),
             myonoffswitchCheck = document.getElementById('myonoffswitch'),
@@ -79,6 +82,9 @@ const accordionCalc = () => {
 
                 total = 10000;
 
+                calcStore.storageBox = 'Однокамерный';
+                calcStore.secondSump = [];
+
             } else if (myonoffswitchCheck.checked === false){
                 titleTwoSump[1].style.display = 'block';
                 selectTwoSump[2].style.display = 'inline-block';
@@ -86,6 +92,8 @@ const accordionCalc = () => {
 
                 total = 15000;
 
+                calcStore.storageBox = 'Двухкамерный';
+                calcStore.secondSump = ['1.4 метра', '1 штука'];
             }
         });
         
@@ -96,7 +104,7 @@ const accordionCalc = () => {
                 diamTwoValue = selectBox[2].options[selectBox[2].selectedIndex].value,
                 ringsTwoValue = selectBox[3].options[selectBox[3].selectedIndex].value;
 
-
+            
             if (total === 10000) {
 
                 total = total * diamValue * ringsValue;
@@ -108,6 +116,7 @@ const accordionCalc = () => {
                 }
 
             } else if (total === 15000) {
+
                 total = total * diamValue * ringsValue * diamTwoValue * ringsTwoValue;
                 newTotal = total;
                 total = 15000;
@@ -115,14 +124,32 @@ const accordionCalc = () => {
                 if (!myonoffswitchCheckTwo.checked) {
                     newTotal -= 2000;
                 }
-            }
 
+            }
             calcResult.value = newTotal;
 
-            calcObj.distance = newTotal;
-            calcObj.cost = +collapseFourInput.value;
-            console.log(calcObj.distance);
-            console.log(calcObj.cost);
+            calcStore.cost = newTotal;            
+            calcStore.distance = +collapseFourInput.value;
+
+            if (myonoffswitchCheckTwo.checked) {
+                calcStore.bilge = 'Есть';
+            } else if (!myonoffswitchCheckTwo.checked) {
+                calcStore.bilge = 'Нет';
+            }
+
+
+            for (let i = 0; i < 2; i++) {
+                calcStore.firstSump[i] = selectBox[i].options[selectBox[i].selectedIndex].textContent;
+            }
+
+            if (calcStore.secondSump.length > 0) {
+                for (let i = 2; i < 4; i++) {
+                    calcStore.secondSump[i - 2] = selectBox[i].options[selectBox[i].selectedIndex].textContent;
+                }
+            }
+            
+            console.log('calcStore: ', calcStore);
+            
         };
 
         calcBlock.addEventListener('change', (event) => {
@@ -135,6 +162,9 @@ const accordionCalc = () => {
 
     };
     calc();
+
+    return calcStore;
+    
 
 };
 
