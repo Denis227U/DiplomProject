@@ -16,8 +16,19 @@ const sendForms = (obj) => {
 
     const statusMessage = document.createElement('div');
         statusMessage.style.cssText = 'font-size: 2rem; color: red;';
+    
+    // валидация форм
+    const formValid = () => {
+        const inputsTel = document.querySelectorAll('input.phone-user');
 
-    console.log(formsCapture);
+        inputsTel.forEach((item) => {
+            item.addEventListener('input', () => {
+                event.target.value = event.target.value.replace(/[^+\d]/g, '');
+            });
+        });    
+        
+    };
+    formValid();
 
     //  form main
      mainForm.addEventListener('submit', (event) => {
@@ -36,8 +47,7 @@ const sendForms = (obj) => {
             .finally(finalyData(mainForm));
     });
 
-    // calcForm
-    // let calcStore = accordionCalc();
+    // calcForm    
     let calcStore = obj;
 
     disctBtn.addEventListener('click', () => {
