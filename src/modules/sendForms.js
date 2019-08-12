@@ -147,6 +147,10 @@ const sendForms = (obj) => {
         if (input) {
             input.value = '';
         }
+
+        setTimeout(()=>{
+            statusMessage.textContent = '';
+        }, 2000);
     };
 
     const postData = (body) => {
