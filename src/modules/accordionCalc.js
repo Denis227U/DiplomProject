@@ -15,15 +15,19 @@ const accordionCalc = () => {
 
 
     // переключение табов
+    panelContent[0].style.maxHeight = panelContent[0].scrollHeight + "px";
     const togglePanelContent = (index) => {
         for (let i = 0; i < panelContent.length; i++) {
-            if (index === i) {
-                panelContent[i].classList.add('in');
+            panelContent[i].classList.add('in');
+            
+            if (index === i) {                
+                panelContent[i].style.maxHeight = panelContent[i].scrollHeight + "px";
             } else {
-                panelContent[i].classList.remove('in');
-            }
-        }
+                panelContent[i].style.maxHeight = null;
+            }            
+        }        
     };
+
 
     panelGroup.addEventListener('click', (event) => {
 
@@ -39,10 +43,11 @@ const accordionCalc = () => {
             });
 
             nextBtn.forEach((item, i) => {
+                panelContent[i].classList.add('in');
                 if (item === target) {
                     if (i < nextBtn.length -1 ) {
-                        panelContent[i].classList.remove('in');
-                        panelContent[i+1].classList.add('in');
+                        panelContent[i].style.maxHeight = null;
+                        panelContent[i+1].style.maxHeight = panelContent[i+1].scrollHeight + "px";
                     }
                 }
             });

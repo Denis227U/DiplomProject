@@ -3,14 +3,17 @@ const accordionQuest = () => {
         panelHead = panelGroup.querySelectorAll('.panel-heading'),
         panelContent = panelGroup.querySelectorAll('.panel-collapse');
 
+    panelContent[0].style.maxHeight = panelContent[0].scrollHeight + "px";
     const togglePanelContent = (index) => {
         for (let i = 0; i < panelContent.length; i++) {
-            if (index === i) {
-                panelContent[i].classList.add('in');
+            panelContent[i].classList.add('in');
+            
+            if (index === i) {                
+                panelContent[i].style.maxHeight = panelContent[i].scrollHeight + "px";
             } else {
-                panelContent[i].classList.remove('in');
-            }
-        }
+                panelContent[i].style.maxHeight = null;
+            }            
+        }        
     };
 
     panelGroup.addEventListener('click', (event) => {
